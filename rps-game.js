@@ -7,22 +7,21 @@ function move(name, beats, loses){
 		beats,
 		loses
 	}
-};
+}
 
 //list of move types
+let allMoves = [];
 const rock = move('rock', 'scissors', 'paper');
 const paper = move('paper', 'rock', 'scissors');
 const scissors = move('scissors', 'paper', 'rock');
+allMoves.push(rock, paper, scissors);
 
 function playTheGame(playerMove){
 
 console.log('Player chooses ' + playerMove.name);
 
-//messy need a better way of doing this
-let computerMove = Math.floor((Math.random() * 3));
-	if(computerMove === 0){computerMove = rock};
-	if(computerMove === 1){computerMove = paper};
-	if(computerMove === 2){computerMove = scissors};
+//messy one liner
+let computerMove = allMoves[Math.floor((Math.random() * allMoves.length))];
 
 console.log('Computer chooses ' + computerMove.name);
 
@@ -44,7 +43,8 @@ function newGame(playerMove, computerMove){
 //play the game
 const game = newGame(playerMove, computerMove);
 console.log(game.result());
-document.getElementById('winner').innerHTML = ( 'Player chooses ' + playerMove.name +
-												'<br>Computer chooses ' + computerMove.name +
-												'<br> ' + game.result() + '</br>');
+document.getElementById('winner').innerHTML = ( 
+	'Player chooses ' + playerMove.name +
+	'<br>Computer chooses ' + computerMove.name +
+	'<br> ' + game.result() + '</br>');
 }
